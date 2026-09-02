@@ -37,7 +37,3 @@ include(GoogleTest)
 gtest_discover_tests(vk_ctx_instance_tests)
 gtest_discover_tests(vk_ctx_surface_tests)
 gtest_discover_tests(vk_ctx_device_tests)
-
-add_test(NAME vk_ctx_instance_tests COMMAND vk_ctx_instance_tests)
-add_test(NAME vk_ctx_surface_tests COMMAND vk_ctx_surface_tests)
-add_test(NAME vk_ctx_device_tests COMMAND vk_ctx_device_tests)

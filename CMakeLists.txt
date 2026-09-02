@@ -26,19 +26,21 @@ target_include_directories(vk_ctx_lib
         ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-target_link_libraries(vk_ctx_lib PRIVATE Vulkan::Vulkan)
+target_link_libraries(vk_ctx_lib PUBLIC Vulkan::Vulkan)
 
 target_compile_features(vk_ctx_lib PUBLIC cxx_std_20)
 
-target_compile_options(vk_ctx_lib PRIVATE
-    $<$<CONFIG:Debug>:-Wall -Wextra -g>
-    $<$<CONFIG:Release>:-O3 -DNDEBUG>
-)
+if (MSVC)
+    target_compile_options(vk_ctx_lib PRIVATE /W4)
+else()
+    target_compile_options(vk_ctx_lib PRIVATE -Wall -Wextra)
+endif()
 
 if (BUILD_TESTING)
     FetchContent_Declare(
         googletest
         URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
+        DOWNLOAD_EXTRACT_TIMESTAMP TRUE
     )
 
     set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
